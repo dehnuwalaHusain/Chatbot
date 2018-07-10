@@ -28,23 +28,14 @@ void display_text ( std::string );
 */
 void introduction ()
 {
-	// Clear screen
-	//#ifdef _WIN32
-		system ("cls || clear");
-	//#else
-	//std::cout << "\033[2J\033[1;1H";
+	system ("cls || clear");
 
-	//#endif
 	std::string intro = "Hello, Human. I am \"Bot\" (for the lack of better names), I am\na natural language processing chatbot. You must have seen many\nlike me on several websites. We are getting famous, you see.\nNow the kind you must've seen so far are goal oriented chatbots.\nLike, medical applications, or help on some particular website.\nBut, I am a generic chatbot. You can talk to me, ask me studd\b\bff, it's\nall going to be responded to.\nAlthough I'm not just perfect yet. My father says he got bored of adding\nwords in my dictionary after a while. Now, he forgot he gave me brains to\nreach into my source and see for myself the 16 embarrassing intents he's designed\nme for. Why are humans such liars? (No offence to you, of course.)\nDon't go away just yet, though. Father tells me there's hope for improvement.\nDon't I speak too much? Anyway, press enter to continue...";
 
 	display_text ( intro );
 	getchar ();
 
-	#ifdef _WIN32
-		system ("cls");
-	#else
-	std::cout << "\033[2J\033[1;1H";
-	#endif
+	system ( "cls || clear");
 
 	std::string rulesIntro = "\"A wise man knows that he knows nothing.\"\nFollowing the ideology, no matter how much I stay optimistic,\nI know I'm a robot. My functionalities are limited. Hence, some rules for you to\nfollow as you chat with me.\nPress enter to continue...";
 	display_text ( rulesIntro );
@@ -58,11 +49,7 @@ void introduction ()
 
 	getchar ();
 
-	#ifdef _WIN32
-		system ("cls");
-	#else
-	std::cout << "\033[2J\033[1;1H";
-	#endif
+	system ( "cls || clear");
 
 }
 
@@ -71,11 +58,12 @@ void display_text ( std::string display )
 {
 	for ( int iter = 0; iter < display.length(); iter++ )	{
 		std::cout << display[iter] << std::flush;
-		#ifdef _WIN32
-		#else
-	//	std::this_thread::sleep_for(std::chrono::milliseconds(60));
-	//	if (display [iter] == '\b')
-	//		std::this_thread::sleep_for(std::chrono::milliseconds(250));
+		#ifndef _WIN32
+			std::this_thread::sleep_for(std::chrono::milliseconds(60));
+			if (display [iter] == '\b')	{
+				std::cout << '\0';
+				std::this_thread::sleep_for(std::chrono::milliseconds(250));
+			}
 		#endif
 	}
 }
