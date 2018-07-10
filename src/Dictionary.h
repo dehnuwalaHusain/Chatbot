@@ -88,7 +88,7 @@ void find_meaning ( std::string word )
 	check1.erase ( check1.begin(), check1.begin() + 43 );
 	check1.erase ( check1.end () - 13, check1.end ( ));
 	for ( int iter = 0 ; iter < check1.length () ; iter++ )	{
-		if ( check1 [ iter ] == '&' || check1 [ iter ] == '.')
+		if ( check1 [ iter ] == '&' || ( check1 [ iter ] == '.' && check1 [ iter + 1 ] == ' ' && check1 [ iter + 2 ] == 'L'))
 		{
 			std::cout << "\n";
 			break;
