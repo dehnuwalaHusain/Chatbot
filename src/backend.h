@@ -1,4 +1,5 @@
 #include "Dictionary.h"
+#include "wiki.h"
 #include <unistd.h>
 #ifdef _WIN32
 #include <thread>
