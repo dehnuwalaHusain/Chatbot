@@ -1,15 +1,16 @@
-#include <bits/stdc++.h>
+#include "Dictionary.h"
 #include <unistd.h>
 #ifdef _WIN32
 #include <thread>
 #endif
-#include "Dictionary.h"
+#include "QNAstruct.h"
 
 #define MAX_QUERIES 19
 
 static Dictionary sets [ MAX_QUERIES ];
 /* ---------------------------------------------------------------------------
  * DECLARATIONS
+ * ---------------------------------------------------------------------------
 */
 Dictionary* initialize_vocabulary ();
 std::string process_input ( std::string , bool ); 
@@ -20,6 +21,7 @@ bool noQuestions ( std::string );
 std::string categorize ( std::string );
 void introduction ();
 void display_text ( std::string );
+void identify_function ( std::string processedQuery );
 
 /*
  * ---------------------------------------------------------------------------
@@ -30,7 +32,7 @@ void introduction ()
 {
 	system ("cls || clear");
 
-	std::string intro = "Hello, Human. I am \"Bot\" (for the lack of better names), I am\na natural language processing chatbot. You must have seen many\nlike me on several websites. We are getting famous, you see.\nNow the kind you must've seen so far are goal oriented chatbots.\nLike, medical applications, or help on some particular website.\nBut, I am a generic chatbot. You can talk to me, ask me studd\b\bff, it's\nall going to be responded to.\nAlthough I'm not just perfect yet. My father says he got bored of adding\nwords in my dictionary after a while. Now, he forgot he gave me brains to\nreach into my source and see for myself the 16 embarrassing intents he's designed\nme for. Why are humans such liars? (No offence to you, of course.)\nDon't go away just yet, though. Father tells me there's hope for improvement.\nDon't I speak too much? Anyway, press enter to continue...";
+	std::string intro = "Hello, Human. I am \"Bot\" (for the lack of better names), I am\na natural language processing chatbot. You must have seen many\nlike me on several websites. We are getting famous, you see.\nNow the kind you must've seen so far are goal oriented chatbots.\nLike, medical applications, or help on some particular website.\nBut, I am a generic chatbot. You can talk to me, ask me stuff, it's\nall going to be responded to.\nAlthough I'm not just perfect yet. My father says he got bored of adding\nwords in my dictionary after a while. Now, he forgot he gave me brains to\nreach into my source and see for myself the 16 embarrassing intents he's designed\nme for. Why are humans such liars? (No offence to you, of course.)\nDon't go away just yet, though. Father tells me there's hope for improvement.\nDon't I speak too much? Anyway, press enter to continue...";
 
 	display_text ( intro );
 	getchar ();
@@ -45,6 +47,7 @@ void introduction ()
 			  << "3. If at some point I don't understand what you mean, try reframing the question.\n"
 			  << "4. Don't be rude.\n"
 			  << "5. Type \"bye\" at any point to exit.\n"
+			  << "6. Type '#DICT' followed by a word to know it's meaning.\n\teg: #DICT word\n"
 			  << "\nShall we begin, then? ;)";
 
 	getchar ();
@@ -58,13 +61,9 @@ void display_text ( std::string display )
 {
 	for ( int iter = 0; iter < display.length(); iter++ )	{
 		std::cout << display[iter] << std::flush;
-		#ifndef _WIN32
-			std::this_thread::sleep_for(std::chrono::milliseconds(60));
-			if (display [iter] == '\b')	{
-				std::cout << '\0';
-				std::this_thread::sleep_for(std::chrono::milliseconds(250));
-			}
-		#endif
+		/*#ifndef _WIN32
+			std::this_thread::sleep_for(std::chrono::milliseconds(30));
+		#endif*/
 	}
 }
 /*
@@ -266,7 +265,10 @@ std::string* evaluate_response ( std::string userQuery )
 */
 std::string categorize ( std::string userQuery )	{
 
-	if (( userQuery.find ( "HOW" ) != std::string::npos) && 
+	if ( userQuery [ 0 ] == '#' )
+		return "FUNCTION";
+
+	else if (( userQuery.find ( "HOW" ) != std::string::npos) && 
 		( userQuery.find ( "YOU" ) != std::string::npos ))
 		return "HEALTH";
 
@@ -386,4 +388,21 @@ std::string categorize ( std::string userQuery )	{
 	else 
 		return "**UNRECOGNIZED**";
 
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * DEFINITION - introduction
+ * Introduces the bots and it's rules. 
+*/
+void identify_function ( std::string processedQuery )
+{
+	if ( processedQuery.find ( "DICT" ) != std::string::npos )	{
+		processedQuery.erase ( processedQuery.begin(), processedQuery.begin()+6 );
+		if ( processedQuery.find ( " " ) != std::string::npos )
+			std::cout << "I can only tell you the meaning of one word at a time." << std::endl;
+		else 	{
+			find_meaning ( processedQuery );
+		}
+	}
 }
