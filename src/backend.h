@@ -404,5 +404,8 @@ void identify_function ( std::string processedQuery )
 		else 	{
 			find_meaning ( processedQuery );
 		}
-	}
+	} else if (processedQuery.find("CLEAR") != std::string::npos) {
+    fflush(stdout);
+    system("cls || clear");
+  }
 }
