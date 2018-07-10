@@ -86,9 +86,9 @@ void find_meaning ( std::string word )
 	while ( is.eof () || check1.find ( search_text ) == std::string::npos );
 	
 	check1.erase ( check1.begin(), check1.begin() + 43 );
-	check1.erase ( check1.end () - 18, check1.end ( ));
+	check1.erase ( check1.end () - 13, check1.end ( ));
 	for ( int iter = 0 ; iter < check1.length () ; iter++ )	{
-		if ( check1 [ iter ] == '&' )
+		if ( check1 [ iter ] == '&' || check1 [ iter ] == '.')
 		{
 			std::cout << "\n";
 			break;
