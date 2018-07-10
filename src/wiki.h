@@ -27,7 +27,7 @@ size_t writeCallbackWik ( char* buf, size_t size, size_t nmemb, void* up )
  
 /*
  * ---------------------------------------------------------------------------
- * DEFINITION - to_lower ( string )
+ * DEFINITION - to_fUpLower ( string )
  * Converts entire string to lower case.
 */
 std::string to_fUpLower ( std::string temp )
