@@ -48,6 +48,7 @@ void introduction ()
 			  << "4. Don't be rude.\n"
 			  << "5. Type \"bye\" at any point to exit.\n"
 			  << "6. Type '#DICT' followed by a word to know it's meaning.\n\teg: #DICT word\n"
+			  << "7. Type '#WIKI' followed by something you want to know about the same way.\n"
 			  << "\nShall we begin, then? ;)";
 
 	getchar ();
