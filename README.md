@@ -8,6 +8,6 @@ Will show you information on a topic if you type *#WIKI keyword*
 
 Compile as:
 
-g++ chatbot.cpp -lcurl -fpermissive -o Chatbot
+```g++ chatbot.cpp -lcurl -fpermissive -o Chatbot```
 
-./Chatbot
+```./Chatbot```
